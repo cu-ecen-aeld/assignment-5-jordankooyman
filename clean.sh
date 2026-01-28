@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script to clean buildroot fully
+# Script to clean buildroot
 
 source shared.sh
 
