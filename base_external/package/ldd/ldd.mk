@@ -4,7 +4,7 @@
 # ldd
 #
 ##############################################################
-# File completed with assistance from DeepSeek: https://chat.deepseek.com/share/ndbcvb75pnn1rgy1h1
+# File edited with assistance from DeepSeek: https://chat.deepseek.com/share/zts7pc730otm3oltvj
 
 # Fill up the contents below in order to reference your assignment 7 git contents
 LDD_VERSION = '9577cd1'
@@ -26,6 +26,7 @@ endef
 
 define LDD_INSTALL_TARGET_CMDS
 	# Install step: copy all generated .ko files into the target's module directory
+	mkdir -p $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/extra
 	$(INSTALL) -D -m 644 $(@D)/misc-modules/*.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/extra/
 	$(INSTALL) -D -m 644 $(@D)/scull/*.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/extra/
 endef
