@@ -4,7 +4,7 @@
 # ldd
 #
 ##############################################################
-# File completed with assistance from DeepSeek: https://chat.deepseek.com/share/ke9swxjqsdmp9ceyr9, https://chat.deepseek.com/share/n28hbtrje83qo6o0ek
+# File completed with assistance from DeepSeek: https://chat.deepseek.com/share/ndbcvb75pnn1rgy1h1
 
 # Fill up the contents below in order to reference your assignment 7 git contents
 LDD_VERSION = '9577cd1'
@@ -19,15 +19,15 @@ LDD_GIT_SUBMODULES = YES
 LDD_DEPENDENCIES = linux
 
 define LDD_BUILD_CMDS
-	# Build LDD3 Kernel Module
-	$(MAKE) -C $(@D) $(LINUX_MAKE_FLAGS) KERNELDIR=$(LINUX_DIR)
-	
+	# Build LDD3 Kernel Modules scull and misc
+	$(MAKE) -C $(@D)/misc-modules $(LINUX_MAKE_FLAGS) KERNELDIR=$(LINUX_DIR)
+	$(MAKE) -C $(@D)/scull $(LINUX_MAKE_FLAGS) KERNELDIR=$(LINUX_DIR)
 endef
 
 define LDD_INSTALL_TARGET_CMDS
 	# Install step: copy all generated .ko files into the target's module directory
-	# Find and install all .ko files from the build tree
-	find $(@D) -name "*.ko" -exec $(INSTALL) -D -m 644 {} $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/extra/ \;
+	$(INSTALL) -D -m 644 $(@D)/misc-modules/*.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/extra/
+	$(INSTALL) -D -m 644 $(@D)/scull/*.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/extra/
 endef
 
 $(eval $(generic-package))
